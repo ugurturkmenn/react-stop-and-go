@@ -77,7 +77,7 @@ function App() {
             : "bg-green-500"
         }`}
     >
-      <p className="text-white text-2xl font-semibold mb-4">{message}</p>
+      <p className="text-white text-2xl font-semibold mb-4 text-center">{message}</p>
       <p className="text-white text-lg font-medium mb-8">Skor: {score}</p>
 
       {!isGameOver ? (
