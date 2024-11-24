@@ -14,7 +14,7 @@ function App() {
   const [score, setScore] = useState<number>(0);
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
   const timeoutRef = useRef<number>(0);
-  const resetTimeoutRef = useRef<number>(0); 
+  const resetTimeoutRef = useRef<number>(0);
 
 
   const [goingGifs, setGoingGifs] = useState<Gif[]>([
@@ -82,12 +82,15 @@ function App() {
   return (
     <div
       className={`flex flex-col items-center justify-center h-screen transition-color ${gameState === GameState.Stopped
-          ? "bg-red-500"
-          : gameState === GameState.NotStarted
-            ? "bg-indigo-500"
-            : "bg-green-500"
+        ? "bg-red-500"
+        : gameState === GameState.NotStarted
+          ? "bg-indigo-500"
+          : "bg-green-500"
         }`}
     >
+      {gameState === GameState.NotStarted && (
+        <p className="text-white text-2xl font-semibold mb-4 text-center">DUR yazısını görene kadar butona tıklamaya çalışın, skorunuzu paylaşın!</p>
+      )}
       <p className="text-white text-2xl font-semibold mb-4 text-center">{message}</p>
       <p className="text-white text-lg font-medium mb-8">Skor: {score}</p>
 
