@@ -9,7 +9,6 @@ enum GameState {
 type Gif = string;
 
 function App() {
-  // State'ler
   const [gameState, setGameState] = useState<GameState>(GameState.NotStarted);
   const [message, setMessage] = useState<string>("Başlamak için tıklayın");
   const [score, setScore] = useState<number>(0);
@@ -101,7 +100,7 @@ function App() {
         <img
           src={currentGif}
           alt="Going GIF"
-          className="mt-4 w-64 h-64 mb-6 rounded-lg shadow-lg absolute right-10"
+          className="fixed top-10 left-1/2 transform -translate-x-1/2 w-64 h-64 rounded-lg shadow-lg"
         />
       )}
     </div>
