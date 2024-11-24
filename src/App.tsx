@@ -14,6 +14,8 @@ function App() {
   const [score, setScore] = useState<number>(0);
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
   const timeoutRef = useRef<number>(0);
+  const resetTimeoutRef = useRef<number>(0); 
+
 
   const [goingGifs, setGoingGifs] = useState<Gif[]>([
     "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHcweG8yZm93cmpuNHh1OXk2ZmgzNXhvOTJmNzdjem5jNm05eWFpdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/kaq6GnxDlJaBq/giphy.webp",
@@ -42,13 +44,22 @@ function App() {
     };
   }, [gameState]);
 
+  useEffect(() => {
+    if (gameState === GameState.Stopped) {
+      resetTimeoutRef.current = setTimeout(() => {
+        setGameState(GameState.Going);
+        setMessage("Başla!");
+      }, Math.floor(Math.random() * 3000) + 1000);
+    }
+    return () => clearTimeout(resetTimeoutRef.current);
+  }, [gameState]);
+
   const handleButtonClick = (): void => {
     if (gameState === GameState.NotStarted) {
       startGame();
     } else if (gameState === GameState.Stopped) {
       setIsGameOver(true);
       setMessage("Oyun sona erdi! Yanlış zamanda hareket ettiniz.");
-      setScore(0);
       setCurrentGif(
         "https://media4.giphy.com/media/AXsNB2z0a2ldS/200w.webp?cid=790b7611vdjhahwpthiozdxifspcxsqn1ydbk3hena3xdkmd&ep=v1_gifs_search&rid=200w.webp&ct=g"
       );
